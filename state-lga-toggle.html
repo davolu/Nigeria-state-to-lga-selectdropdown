@@ -1,0 +1,136 @@
+ 
+                                                <label>State</label>
+                                               <select id="states" class="form-control" id="state" onchange="showLga()" style="display:inline;">
+
+                                                <option value="*">SELECT STATE</option>
+                                                <option>ABUJA</option>
+                                                <option>ABIA</option>
+                                                <option>ADAMAWA</option>
+                                                 <option>AKWA IBOM</option> 
+                                                <option>ANAMBRA</option>
+                                                 <option>BAUCHI</option> 
+                                                 <option>BAYELSA</option> 
+                                                 <option>BENUE</option> 
+                                                <option>BORNO</option>
+                                                <option>CROSS RIVER</option>
+                                                <option>DELTA</option>
+                                                 <option>EBONYI</option> 
+                                                <option>EDO</option>
+                                                 <option>ENUGU</option> 
+
+                                                <option> EKITI</option>
+                                                 <option>ENUGU</option> 
+                                                 <option>GOMBE</option> 
+                                                 <option>IMO</option> 
+                                                 <option>JIGAWA</option> 
+                                                <option>IMO</option>
+                                                <option>KADUNA</option>
+                                                <option>KANO</option>
+                                                 <option>KATSINA</option>
+                                                <option>KEBBI</option>
+                                                <option>KOGI</option> 
+                                                <option>KWARA</option>
+                                                <option>LAGOS</option>
+                                                 <option>NASARAWA</option>
+                                                 <option>NIGER</option>
+                                                <option>OGUN</option>
+                                                <option>ONDO</option>
+                                                <option>OSUN</option>
+                                                <option>OYO</option>
+                                                <option>PLATEAU</option>
+                                                <option>RIVERS</option>
+                                                 <option>SOKOTO</option>
+                                                <option>TARABA</option>
+                                                <option>YOBE</option>
+                                                <option>ZAMFARA</option> 
+                                                </select>
+                                       
+									   
+									   <br/>
+									   
+									   
+                                                <label>Area</label>
+                                             <select id="Alga"   class="form-control"  disabled>
+ 
+ 
+                                                </select>
+ 
+
+ <script>
+ 
+  
+   function showLga()
+   {
+       
+ 
+     var xyz = document.getElementById("states").value;
+     
+     
+    var Alga = document.getElementById("Alga");     
+            var options = "";
+
+                                if (window.XMLHttpRequest)
+                                          {// code for IE7+, Firefox, Chrome, Opera, Safari
+                                          xmlhttp=new XMLHttpRequest();
+                                          }
+                                        else
+                                          {// code for IE6, IE5
+                                          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                                          }
+                                          
+                                          
+                                        xmlhttp.open("GET","lga.xml?v=<?php echo md5(rand()); ?>",false);
+                                        xmlhttp.send();
+                                        xmlDoc=xmlhttp.responseXML; 
+                        
+                        
+                        
+                        
+                                        var x=xmlDoc.getElementsByTagName("areas");
+                                        var states_array=[];
+                                        var lga_array=[];
+                                        var value="---Select LGA---";
+                                        
+                                        for (i=0;i<x.length;i++)
+                                      { 
+                                         states_array.push(x[i].getElementsByTagName("states")[0].childNodes[0].nodeValue);
+                                         lga_array.push(x[i].getElementsByTagName("lga")[0].childNodes[0].nodeValue);
+                                         
+                                      
+                                      }
+                                      
+         
+                                      
+                                //  alert(states_array);
+                                      
+                                      
+                                      for(j=0; j<states_array.length; j++)
+                                          {
+                                            //  document.write(states_array[j].replace(/\s+/g,"").toString().toLowerCase() === xyz.toLowerCase().replace(/\s+/g,""));
+                                              //xyz.toString().toLowerCase()
+                                    
+                                    if( states_array[j].replace(/\s+/g,"").toString().toLowerCase() === xyz.toLowerCase().replace(/\s+/g,""))
+                                                   {
+                                                 
+                                                       
+                                                       options+="<option>"+lga_array[j]+"</option>";
+                                                                Alga.disabled = false;
+                                               }
+                                                  
+                                         
+
+                                                 }
+                  
+                 
+                                                            Alga.innerHTML = options+"<option>Others</option>";      
+                                                        //  Alga.onchange();
+                                                                                     
+                                     
+
+    
+    
+ 
+   }
+
+   </script>
+                                    
